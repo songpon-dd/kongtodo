@@ -1,0 +1,25 @@
+api_gateway:
+  service_name: kongtodo
+  endpoints:
+    - path: /ping
+      methods: [GET]
+      access:
+        public: false
+        anonymous: true
+    - path: /v1/todos
+      methods: [GET]
+      access:
+        public: true
+        anonymous: true
+    - path: /v1/todos
+      methods: [POST, PUT, DELETE]
+      access:
+        public: true
+        anonymous: false
+        authorization:
+          by_id: 
+            value: true
+            id_param_name: user_id 
+          by_role: 
+            - ROLE_ADMIN
+          region_param_name: region_name
